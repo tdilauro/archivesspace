@@ -1,0 +1,135 @@
+<% supported_types = %w(repository resource agent_corporate_entity agent_person) %>
+
+<% if @result && @result['jsonmodel_type'] && supported_types.include?(@result['jsonmodel_type']) %>
+
+  <script type="application/ld+json">
+  <%
+  record = @result['json']
+  case record['jsonmodel_type']
+  when 'repository'
+  %>
+  {
+    "@context": "http://schema.org/",
+    "@type": "[% Library or Organization %]",
+    "@id": "[% link to Wikidata/Freebase URI, if available %]",
+    "name": "<%= record['name'] %>",
+    "url": "<%= record['url'] %>",
+    "image": "<%= record['image_url'] %>",
+    "sameAs": "[% link to wikipedia, twitter, facebook, etc %]",
+    "priceRange": 0,
+    "alternateName": "[% other names in use %]",
+    "telephone": "[% phone number %]",
+    "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "[% street and number %[",
+                "addressLocality": "[% city %]",
+                "addressRegion": "[% state %]",
+                "postalCode": "[% zip code %]"
+    },
+    "parentOrganization": {
+                "@type": "[% Organization or CollegeOrUniversity etc %]",
+                "@id": "[% link to Wikidata/Freebase URI, if available %]",
+                "name": "<%= record['parent_institution_name'] %>",
+                "sameAs": "[% links to wikipedia, twitter, facebook, etc %]"
+                "url": "[% link %]"
+    }
+  }
+
+  <% when 'resource' %>
+  {
+    "@context": "http://schema.org/",
+    "@type": "Collection",
+    "name": "<%= record['title'] %>",
+    "description": [
+        "<< Abstract >>" or "<< Scope and Contents >>" or "<< Biographical Note >>"
+        ],
+    "datePublished": "<%= record['system_mtime'] %>",
+    "temporalCoverage": "<%= record['dates'][0]['begin'] %> -- <%= record['dates'][0]['end'] %>",
+    "creator": [
+        {"@type": "Person", "name": "<< Person Agent(s) marked as Creator >>"},
+        {"@type": "Organization", "name": "<< Corporate Entity Agent(s) marked as Creator >>"},
+        {"@type": "Organization", "name": "<< Family Entity Agent(s) marked as Creator >>"}
+      ],
+   "contributor": [
+      {"@type": "Person", "name": "<< Person Agent(s) marked as Contributor >>"},
+      {"@type": "Organization", "name": "<< Corporate Entity Agent(s) marked as Contributor >>"},
+      {"@type": "Organization", "name": "<< Family Entity Agent(s) marked as Contributor >>"}
+    ],
+  "about": [
+      {"@type": "Person", "name": "<< Person Agent(s) marked as Subject >>"},
+      {"@type": "Organization", "name": "<< Corporate Entity Agent(s) marked as Subject >>"},
+      {"@type": "Organization", "name": "<< Family Entity Agent(s) marked as Subject >>"}
+    ],
+  "keywords":  [
+      "<< subject(s) >>"
+        ],
+  "url": "<< StaticAid URL >>",
+  "offers": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStoreOnly",
+      "serialNumber": "<< Identifier/ID number >>",
+      "priceCurrency": "USD",
+      "price": 0,
+      "businessFunction": "http://purl.org/goodrelations/v1#ProvideService",
+                  "offeredBy": {
+          "@type": "[% Library or Organization %]",
+          "@id": "[% link to Wikidata/Freebase URI, if available %]",
+          "name": "[% Name of archive/library %]",
+          "url": "[% link %]",
+          "image": "[% link to logo/building image %]",
+          "sameAs": "[% links to wikipedia, twitter, facebook, etc %]",
+          "priceRange": 0,
+          "alternateName": "[% other names in use %]",
+          "telephone": "[% phone number %]",
+                    "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "[% street and number %]",
+              "addressLocality": "[% city %]",
+              "addressRegion": "[% state %]",
+              "postalCode": "[% zip code %]"
+                    },
+                    "parentOrganization": {
+              "@type": "[% Organization or CollegeOrUniversity etc %]",
+              "@id": "[% link to Wikidata/Freebase URI, if available %]",
+              "name": "[% Name of parent org %]",
+              "url": "[% link %]",
+              "sameAs": "[% links to wikipedia, twitter, facebook, etc %]"
+                    }
+                  }  
+                }
+              }
+
+
+  <% when 'agent_corporate_entity' %>
+
+         {  
+   "@context": "http://schema.org/",
+   "@type": "Organization",
+   "url": "<< url to this page >>",
+   "alternateName": [  
+      "<< alternate name forms from data >>"
+   ],
+   "name": "<< authorized form of name >>"
+    }
+
+
+  <% when 'agent_person' %>
+
+         {  
+   "@context": "http://schema.org/",
+   "@type": "Person",
+   "url": "<< url to this page >>",
+   "birthDate": "<< dates_of_existence.begin, if available >>",
+   "deathDate": "<< dates_of_existence.end, if available >>",
+   "additionalName": [  
+      "<< alternate name forms from data >>"
+   ],
+   "name": "<< authorized form of name >>"
+    }
+
+  <% end %>
+
+  </script>
+
+<% end %>
+
