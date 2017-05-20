@@ -125,6 +125,12 @@ module ArchivesSpace
       end
     end
 
+    config.assets.precompile += [lambda do |filename, path|
+                                   # These are our two top-level stylesheets
+                                   # that pull the other stuff in.  Precompile
+                                   # them.
+                                   path =~ /themes\/.*?\/(application|bootstrap)\.less/
+                                 end]
     # Allow overriding of the locales via the local folder(s)
     if not ASUtils.find_local_directories.blank?
       # i18n locales
