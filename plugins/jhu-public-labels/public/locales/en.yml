@@ -10,6 +10,12 @@ en:
       our collection of online sheet music, %{levycoll}.
       or our data repository, %{datarepo}.
 
+  contactus:
+    name:
+      short: Contact Us!
+      long: Contact Us!
+    url: mailto:specialcollections@lists.jhu.edu
+
   instrepo:
     name:
       short: JScholarship
