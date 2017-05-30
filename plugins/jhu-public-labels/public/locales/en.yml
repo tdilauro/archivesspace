@@ -33,3 +33,40 @@ en:
       short: The Levy Sheet Music Collection
       long: The Lester S. Levy Sheet Music Collection
     url: http://levysheetmusic.mse.jhu.edu/
+
+  # make changes to this one. it is merged into others below.
+  local_component_pui_sections: &pui_component_sections
+    section:
+      components: Collection Details
+      summary: Summary
+
+  archival_object:
+    _public:
+      << : *pui_component_sections
+      messages:
+        no_components: Archival Object has no components
+
+  resource:
+    _singular: Collection
+    _plural: Collections
+    _public:
+      << : *pui_component_sections
+      messages:
+        no_components: Resource has no components
+
+  digital_object: &digital_object_attributes
+    _public:
+      << : *pui_component_sections
+      messages:
+        no_components: Digital Object has no components
+
+  digital_object_component:
+    _public:
+      << : *pui_component_sections
+      messages:
+        no_components: Digital Object Component has no components
+
+
+  record_tree:
+    record_tree_tab: Collection Details
+    search_tab: Search this Collection
