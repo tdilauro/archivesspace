@@ -1,0 +1,138 @@
+//
+
+// use default theme for defaults
+@import "../default/default";
+
+@jhuBlue: #002D72;
+
+@import (inline) "font.local.css";
+
+@textColor: @black;
+@headingsColor: @jhuBlue;
+
+@linkColor: @jhuBlue;
+@linkColorHover: @grayLight;
+
+@navbarCollapseWidth: 979px;
+@navbarUncollapseWidth: @navbarCollapseWidth + 1px;
+@navbarLinkColor: @jhuBlue;
+@navbarLinkColorHover: @grayLight;
+
+@siteNavLinkColor: #BBB;
+@siteNavHoverColor: #EEE;
+@siteNavBackgroundColor: @jhuBlue;
+
+@jhuHeadingsFontFamily: 'Titling-Gothic';
+@jhuBodyFontFamily: 'Gentona';
+
+@baseFontFamily: 'Gentona';
+
+body {
+  background: none;
+}
+
+// control screen reader stuff
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+// special behaviors for "contact us" link
+.contact-us {
+  float: none;
+
+  @media (min-width: 980px) {
+      float: right !important;
+      color: @red;
+  }
+}
+
+
+.branding-container {
+
+  // organizational branding
+  .jhu-branding-org {
+    float: left;
+    width: 240px;
+    height: 70px;
+    overflow: hidden;
+    margin: 5px 5px 0 5px;
+    vertical-align: middle;
+    display: inline-block;
+
+    img {
+      max-width: 300px;
+      overflow: hidden;
+      margin: -28px 0 0 -30px;
+    }
+  }
+
+  // application branding
+  .jhu-branding-app {
+    float: left;
+    width: 250px;
+    height: 70px;
+    overflow: hidden;
+    margin: 5px 5px 0 5px;
+    vertical-align: middle;
+    display: none;
+    font-size: xx-large;
+    text-align: left;
+    justify-content: center;
+    align-items: center;
+    color: #AAA;
+
+    @media (min-width: 525px){
+      float: right;
+      display: flex;
+      text-align: right;
+    }
+  }
+
+  #jhu-main-nav {
+
+    .jhu-nav-heading {
+      float: left;
+      display: inline-flex;
+      font-family: @jhuHeadingsFontFamily, sans-serif;
+      font-size: larger;
+      padding: 12px 15px 12px;
+      text-decoration: none;
+      text-shadow: none;
+      padding-left: 0;
+    }
+
+    #jhu-navbar {
+      @media (min-width: 980px) {
+        display: inline-block;
+        height: 30px !important;
+      }
+    }
+
+    .navbar-inner {
+      background: @siteNavBackgroundColor;
+      color: @siteNavLinkColor;
+      border-radius: 0;
+      border-color: @siteNavBackgroundColor;
+    }
+
+    .nav > li {
+      background: @siteNavBackgroundColor;
+      a {
+        color: @siteNavLinkColor;
+        background: @siteNavBackgroundColor;
+        text-shadow: none;
+      }
+    //
+      a:hover {
+        color: @siteNavHoverColor;
+      }
+    }
+  }
+}
