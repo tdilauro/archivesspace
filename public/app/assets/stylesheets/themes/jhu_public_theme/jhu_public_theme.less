@@ -22,6 +22,9 @@
 @siteNavHoverColor: #EEE;
 @siteNavBackgroundColor: @jhuBlue;
 
+@appBrandingColor: #AAA;
+@appMenuColor: @jhuBlue;
+
 @jhuHeadingsFontFamily: 'Titling-Gothic';
 @jhuBodyFontFamily: 'Gentona';
 
@@ -54,6 +57,32 @@ body {
 }
 
 
+.nav-heading {
+  font-family: @jhuHeadingsFontFamily, sans-serif;
+  float: left;
+  height: 100%;
+  overflow: hidden;
+  padding: 10px 5px 10px 0;
+  font-size: larger;
+  text-align: left;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    color: @grayLight;
+  }
+}
+
+.app-nav-heading {
+  .nav-heading;
+  color: @appMenuColor;
+
+  @media (min-width: 980px) {
+    display: none;
+  }
+}
+
 .branding-container {
 
   // organizational branding
@@ -62,6 +91,7 @@ body {
     width: 240px;
     height: 70px;
     overflow: hidden;
+    padding: 10px 0 10px;
     margin: 5px 5px 0 5px;
     vertical-align: middle;
     display: inline-block;
@@ -79,6 +109,7 @@ body {
     width: 250px;
     height: 70px;
     overflow: hidden;
+    padding: 10px 0 10px 0;
     margin: 5px 5px 0 5px;
     vertical-align: middle;
     display: none;
@@ -86,9 +117,9 @@ body {
     text-align: left;
     justify-content: center;
     align-items: center;
-    color: #AAA;
+    color: @appBrandingColor;
 
-    @media (min-width: 525px){
+    @media (min-width: 600px){
       float: right;
       display: flex;
       text-align: right;
@@ -98,17 +129,13 @@ body {
   #jhu-main-nav {
 
     .jhu-nav-heading {
-      float: left;
-      display: inline-flex;
-      font-family: @jhuHeadingsFontFamily, sans-serif;
-      font-size: larger;
-      padding: 12px 15px 12px;
-      text-decoration: none;
-      text-shadow: none;
-      padding-left: 0;
+      .nav-heading;
     }
 
     #jhu-navbar {
+      .collapsing, .collapsed {
+        display: none;
+      }
       @media (min-width: 980px) {
         display: inline-block;
         height: 30px !important;
@@ -125,9 +152,13 @@ body {
     .nav > li {
       background: @siteNavBackgroundColor;
       a {
+        padding: 13px 15px 7px;
         color: @siteNavLinkColor;
         background: @siteNavBackgroundColor;
         text-shadow: none;
+        @media (max-width: 979px) {
+          padding: 10px 15px 10px;
+        }
       }
     //
       a:hover {
