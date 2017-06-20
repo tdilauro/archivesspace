@@ -3,9 +3,18 @@
 // use default theme for defaults
 @import "../default/default";
 
-@jhuBlue: #002D72;
-
 @import (inline) "jhu_fonts.css";
+
+@jhuBlue: #002D72;
+@grayLight: #555;
+
+@paginationActiveBackground: #f5f5f5;
+
+.pagination ul > .active > a,
+.pagination ul > .active > span {
+  color: @grayLight;
+  cursor: default;
+}
 
 @textColor: @black;
 @headingsColor: @jhuBlue;
@@ -21,21 +30,66 @@
 @siteNavLinkColor: #BBB;
 @siteNavHoverColor: #EEE;
 @siteNavBackgroundColor: @jhuBlue;
+@siteResultsStandardFontSize: 14px;
+@siteResultsMobileFontSize: 15px;
 
-@appBrandingColor: #AAA;
+@appBrandingColor: #555;
 @appMenuColor: @jhuBlue;
 
 @jhuHeadingsFontFamily: 'Titling-Gothic';
 @jhuBodyFontFamily: 'Gentona';
 
-@baseFontFamily: 'Gentona';
+@baseFontFamily: @jhuBodyFontFamily;
 
 
 // Application styles
 
+.span3 {
+  //float:right !important;
+  padding: 10px 20px 20px 20px;
 
-body {
-  background: none;
+  #search-facets-heading {
+    font-family: @jhuBodyFontFamily, sans-serif;
+    color: @jhuBlue;
+  }
+
+  .navbar {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+  }
+
+  @media (max-width: 767px) {
+    li {
+      padding: 5px 5px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    //.navbar { all: inherit; }
+    padding: inherit;
+
+    .navbar-inner { all: inherit; }
+    .btn-navbar { display: none; }
+    .nav-heading { display: none; }
+    .nav-collapse, .collapse {
+      all: inherit;
+      height: auto !important;
+    }
+  }
+}
+.span9 {
+  //float: left !important;
+  //margin-left: 0 !important;
+  @media (max-width: 767px) {
+    .table-search-results {
+    }
+    .table-condensed th,
+    .table-condensed td {
+      padding: 10px 5px;
+      font-size: @siteResultsMobileFontSize;
+    }
+  }
+
 }
 
 // control screen reader stuff
@@ -50,6 +104,19 @@ body {
   border: 0;
 }
 
+body {
+  background: none;
+}
+
+.badge-info {
+  background-color: @jhuBlue;
+  font-weight: normal;
+}
+
+.table-search-results {
+  font-size: @siteResultsStandardFontSize;
+}
+
 // special behaviors for "contact us" link
 .contact-us {
   float: none;
@@ -60,7 +127,7 @@ body {
 }
 
 
-.nav-heading {
+.nav-heading, .nav-heading:focus, .nav-heading:active {
   font-family: @jhuHeadingsFontFamily, sans-serif;
   float: left;
   cursor: pointer;
@@ -72,10 +139,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-
-  &:hover {
-    color: @grayLight;
-  }
 }
 
 .app-nav-heading {
@@ -114,12 +177,12 @@ body {
     height: 70px;
     overflow: hidden;
     padding: 10px 0 10px 0;
-    margin: 5px 5px 0 5px;
+    margin: 5px 15px 0 5px;
     vertical-align: middle;
     display: none;
-    font-size: xx-large;
+    font-size: x-large;
     text-align: left;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     color: @appBrandingColor;
 
@@ -137,9 +200,9 @@ body {
     }
 
     #jhu-navbar {
-      .collapsing, .collapsed {
-        display: none;
-      }
+      //.collapsing, .collapsed {
+      //  display: none;
+      //}
       @media (min-width: 980px) {
         display: inline-block;
         height: 30px !important;
