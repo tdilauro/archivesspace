@@ -1,4 +1,4 @@
-source "https://rubygems.org"
+source "http://rubygems.org"
 
 gem "atomic", '= 1.0.1'
 gem 'rack', '1.4.7'
