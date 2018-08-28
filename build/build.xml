@@ -96,7 +96,7 @@
       <env key="GEM_PATH" value="" />
       <env key="BUNDLE_PATH" value="${gem_home}" />
       <env key="HOME" value="${build.home}" />
-      <arg line="--1.9 -S gem install bundler -v 1.12.5" />
+      <arg line="--1.9 -S gem install bundler -v 1.12.5 -s http://rubygems.org" />
     </java>
 
     <antcall target="bundler">
